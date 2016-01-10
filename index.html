@@ -198,7 +198,7 @@
   
     <div class="article-meta">
       <a href="/2016/01/10/日常问题解决/" class="article-date">
-  	<time datetime="2016-01-10T07:07:36.000Z" itemprop="datePublished">2016-01-10</time>
+  	<time datetime="2016-01-10T07:12:10.000Z" itemprop="datePublished">2016-01-10</time>
 </a>
     </div>
   
@@ -212,7 +212,8 @@
         
         <p>title: 日常问题解决</p>
 <p>date: 2016-01-05 11:52:42</p>
-<h2 id="tags:Android">tags:Android</h2><h3 id="前言：开发中遇见的一些问题，都会集中在这个帖子中。">前言：开发中遇见的一些问题，都会集中在这个帖子中。</h3><ol>
+<p>tags:Android</p>
+<h3 id="前言：开发中遇见的一些问题，都会集中在这个帖子中。">前言：开发中遇见的一些问题，都会集中在这个帖子中。</h3><ol>
 <li><p>设置Dialog的位置</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">YYHLoginDialog mLoginDialog = <span class="keyword">new</span> YYHLoginDialog(mActivity);</span><br><span class="line">			Window dialogWindow = mLoginDialog.getWindow();</span><br><span class="line">			WindowManager.LayoutParams lp = dialogWindow.getAttributes();</span><br><span class="line">			<span class="comment">//背景无遮罩</span></span><br><span class="line">			dialogWindow.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);</span><br><span class="line">			dialogWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);</span><br><span class="line">			lp.y = GlobalUtils.convertDipOrPx(mActivity, <span class="number">80</span>);</span><br><span class="line">			dialogWindow.setAttributes(lp);;</span><br></pre></td></tr></table></figure>
 </li>
