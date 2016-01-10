@@ -194,6 +194,91 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-日常问题解决" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/10/日常问题解决/" class="article-date">
+  	<time datetime="2016-01-10T07:07:36.000Z" itemprop="datePublished">2016-01-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <p>title: 日常问题解决</p>
+<p>date: 2016-01-05 11:52:42</p>
+<h2 id="tags:Android">tags:Android</h2><h3 id="前言：开发中遇见的一些问题，都会集中在这个帖子中。">前言：开发中遇见的一些问题，都会集中在这个帖子中。</h3><ol>
+<li><p>设置Dialog的位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">YYHLoginDialog mLoginDialog = <span class="keyword">new</span> YYHLoginDialog(mActivity);</span><br><span class="line">			Window dialogWindow = mLoginDialog.getWindow();</span><br><span class="line">			WindowManager.LayoutParams lp = dialogWindow.getAttributes();</span><br><span class="line">			<span class="comment">//背景无遮罩</span></span><br><span class="line">			dialogWindow.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);</span><br><span class="line">			dialogWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);</span><br><span class="line">			lp.y = GlobalUtils.convertDipOrPx(mActivity, <span class="number">80</span>);</span><br><span class="line">			dialogWindow.setAttributes(lp);;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   这么设置的没有问题，如果把：</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WindowManager.LayoutParams lp = dialogWindow.getAttributes();</span><br></pre></td></tr></table></figure>
+<p>   替换成：</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WindowManager.LayoutParams lp = <span class="keyword">new</span> WindowManager.LayoutParams();</span><br></pre></td></tr></table></figure>
+<p>   就会出现背景是黑色的问题。</p>
+<ol>
+<li><p>startActivityForResult() 后直接调用 onActivityResult()</p>
+<p>这个问题是在开发中偶然遇见的问题。调用startActivityForResult()方法后，直接就调用了onActivityResult()。后来找到了原因，是因为启动的目标Activity设置了加载模式（launchMode）。启动的Activity<em>只能使用标准模式</em>。</p>
+</li>
+<li><p>获得状态栏高度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getStatusBar</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">		Class&lt;?&gt; c = <span class="keyword">null</span>;</span><br><span class="line">		Object obj = <span class="keyword">null</span>;</span><br><span class="line">		Field field = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">int</span> x = <span class="number">0</span>, sbar = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			c = Class.forName(<span class="string">"com.android.internal.R$dimen"</span>);</span><br><span class="line">			obj = c.newInstance();</span><br><span class="line">			field = c.getField(<span class="string">"status_bar_height"</span>);</span><br><span class="line">			x = Integer.parseInt(field.get(obj).toString());</span><br><span class="line">			sbar = context.getResources().getDimensionPixelSize(x);</span><br><span class="line">			<span class="keyword">return</span> sbar;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e1) &#123;</span><br><span class="line">			Log.e(<span class="string">"Tag"</span>,<span class="string">"get status bar height fail"</span>);</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   ​</p>
+<p>   ​</p>
+
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+        
+
+  
     <article id="post-Android-动画" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
